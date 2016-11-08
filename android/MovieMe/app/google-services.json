@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "48638536584",
+    "project_id": "movieme-d297c"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48638536584:android:692535212ece7179",
+        "android_client_info": {
+          "package_name": "com.movie.me.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48638536584-3stllrnnj17f8g091pcjp2s6g70u16rc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.movie.me.android",
+            "certificate_hash": "F451F724F41633A37DC0F3C94BBD9F8E55F1C237"
+          }
+        },
+        {
+          "client_id": "48638536584-a8v79ohshom0sgdevkmounf214qg645s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKj-DLHGa6r9HTV-JvXcmYnx14J4rpuHk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
