@@ -188,9 +188,9 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_in_button:
-//                Intent i = new Intent(this, SearchMovie.class);
-//                startActivity(i);
-                signIn();
+                Intent i = new Intent(this, SearchActivity.class);
+                startActivity(i);
+//                signIn();
                 break;
             case R.id.sign_out_button:
                 signOut();

@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".SearchMovie" />
         <activity android:name=".MovieSearchResults" />
-        <activity android:name=".MovieInfo"></activity>
+        <activity android:name=".MovieInfo" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
