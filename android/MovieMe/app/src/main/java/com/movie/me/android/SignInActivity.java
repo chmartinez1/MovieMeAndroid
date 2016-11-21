@@ -2,7 +2,6 @@ package com.movie.me.android;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +17,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
+import com.movie.me.android.search.SearchActivity;
 
 public class SignInActivity extends  AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
@@ -175,7 +173,7 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
             hideProgressDialog();
-            Intent i = new Intent(this, SearchMovie.class);
+            Intent i = new Intent(this, SearchActivity.class);
             startActivity(i);
         } else {
             // Signed out, show unauthenticated UI.

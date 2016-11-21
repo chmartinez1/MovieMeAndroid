@@ -1,12 +1,14 @@
 package com.movie.me.android.rest;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.movie.me.android.MovieSearchResults;
+import com.movie.me.android.search.SearchResultProvider;
+import com.movie.me.android.search.SearchSubscriber;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,12 +19,26 @@ import java.net.URL;
 /**
  * Created by hargueta on 10/27/16.
  */
-public class FetchMovieTask extends AsyncTask<String, Void, String> {
-    private final String LOG_TAG = FetchMovieTask.class.getSimpleName();
+public class FetchSearchResultTask extends AsyncTask<String, Void, String> {
+    private final String LOG_TAG = FetchSearchResultTask.class.getSimpleName();
+    private SearchResultProvider searchResultProvider;
+    private SearchSubscriber searchSubscriber;
     private Context context;
+    private String searchType;
 
-    public FetchMovieTask(Context context) {
+    private ProgressDialog dialog;
+
+    public FetchSearchResultTask(String seardhType, Context context, SearchResultProvider searchResultProvider, SearchSubscriber searchSubscriber) {
+        this.searchResultProvider = searchResultProvider;
+        this.searchSubscriber = searchSubscriber;
         this.context = context;
+        this.searchType = seardhType;
+        dialog = new ProgressDialog((this.context));
+    }
+
+    protected void onPreExecute() {
+        this.dialog.setMessage("Fetching...");
+        this.dialog.show();
     }
 
     @Override
@@ -32,19 +48,29 @@ public class FetchMovieTask extends AsyncTask<String, Void, String> {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
+        Log.d("HELLO", "I am in here!!");
+
         // Will contain the raw JSON response as a string.
         String movieJsonStr = null;
 
 
         try {
             // Construct the URL for the MovieMe query
-            final String MOVIE_BASE_URL =
-                    "http://ec2-35-162-141-107.us-west-2.compute.amazonaws.com:8080/movie/search?";
+            String SEARCH_BASE_URL =
+                    "http://ec2-35-161-100-204.us-west-2.compute.amazonaws.com:8080/" + searchType + "/search?";
 
-//            final String MOVIE_BASE_URL = "http:/198.189.249.55:8080/movie/search?";
-            final String QUERY_PARAM = "title";
+            String QUERY_PARAM = null;
 
-            Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+            switch(searchType) {
+                case "movie":
+                    QUERY_PARAM = "title";
+                    break;
+                case "user":
+                    QUERY_PARAM = "name";
+                    break;
+            }
+
+            Uri builtUri = Uri.parse(SEARCH_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, params[0])
                     .build();
 
@@ -74,6 +100,7 @@ public class FetchMovieTask extends AsyncTask<String, Void, String> {
 
             if (buffer.length() == 0) {
                 // Stream was empty. No point in parsing.
+                Log.d("Empty", "Empty");
                 return null;
             }
 
@@ -106,10 +133,12 @@ public class FetchMovieTask extends AsyncTask<String, Void, String> {
     @Override
     public void onPostExecute(String result) {
         if (result != null) {
-            Intent intent = new Intent(context, MovieSearchResults.class);
-            String MOVIE_TEXT = result;
-            intent.putExtra("result", result);
-            context.startActivity(intent);
+            searchSubscriber.notifyResult(result);
+            this.dialog.dismiss();
+            searchResultProvider.resetFetchSearchResultTask();
+            Log.d("Result", result);
+        } else {
+            Log.d("Result", "Null result");
         }
     }
 }
