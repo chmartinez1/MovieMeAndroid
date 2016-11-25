@@ -2,7 +2,7 @@ general:
   build_dir: android/MovieMe
 dependencies:
   pre:
-      - echo y | android update sdk --no-ui --all --filter platform-tools,build-tools-25.0.0,tools,android-25,extra-google-m2repository,extra-android-m2repository
+      - echo y | android update sdk --no-ui --all --filter "platform-tools,build-tools-25.0.0,tools,android-25,extra-google-m2repository,extra-android-m2repository"
 test:
   override:
       - ./gradlew build test jacocoTestReport
