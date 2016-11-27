@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.movie.me.android.R;
 import com.movie.me.android.domain.Movie;
 import com.movie.me.android.domain.User;
+import com.movie.me.android.util.RecyclerViewClickSubscriber;
 import com.movie.me.android.util.RoundedTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -23,21 +24,24 @@ import static android.support.v7.recyclerview.R.styleable.RecyclerView;
  * Created by hargueta on 11/20/16.
  */
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserViewHolder> {
+public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserViewHolder> implements View.OnClickListener {
     private Context context;
     private List<User> userResultList;
     private LayoutInflater layoutInflater;
+    private RecyclerViewClickSubscriber subscriber;
 
-    public UserListAdapter(Context context, List<User> userResultList) {
+    public UserListAdapter(Context context, List<User> userResultList, RecyclerViewClickSubscriber subscriber) {
         this.context = context;
         this.userResultList = userResultList;
         this.layoutInflater = LayoutInflater.from(this.context);
+        this.subscriber = subscriber;
     }
 
 
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View userView = layoutInflater.inflate(R.layout.single_user_result, parent, false);
+        userView.setOnClickListener(this);
         UserViewHolder userHolder = new UserListAdapter.UserViewHolder(userView);
         return userHolder;
     }
@@ -52,6 +56,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     @Override
     public int getItemCount() {
         return userResultList.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        subscriber.notifyClick(view);
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {

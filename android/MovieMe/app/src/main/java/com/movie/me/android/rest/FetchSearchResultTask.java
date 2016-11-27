@@ -57,7 +57,7 @@ public class FetchSearchResultTask extends AsyncTask<String, Void, String> {
         try {
             // Construct the URL for the MovieMe query
             String SEARCH_BASE_URL =
-                    "http://ec2-35-161-100-204.us-west-2.compute.amazonaws.com:8080/" + searchType + "/search?";
+                    "http://ec2-35-164-162-49.us-west-2.compute.amazonaws.com:8080/" + searchType + "/search?";
 
             String QUERY_PARAM = null;
 

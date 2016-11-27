@@ -83,6 +83,11 @@ public class SearchActivity extends AppCompatActivity implements SearchResultPro
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);

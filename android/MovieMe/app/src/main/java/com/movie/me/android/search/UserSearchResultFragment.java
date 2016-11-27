@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.movie.me.android.R;
 import com.movie.me.android.controller.UserListAdapter;
 import com.movie.me.android.domain.User;
+import com.movie.me.android.util.RecyclerViewClickSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserSearchResultFragment extends Fragment implements SearchSubscriber {
+public class UserSearchResultFragment extends Fragment implements SearchSubscriber, RecyclerViewClickSubscriber {
     private RecyclerView userRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<User> userList;
@@ -61,7 +62,7 @@ public class UserSearchResultFragment extends Fragment implements SearchSubscrib
         layoutManager = new LinearLayoutManager(context);
 
         userRecyclerView.setHasFixedSize(true);
-        userRecyclerView.setAdapter(new UserListAdapter(context, new ArrayList<User>()));
+        userRecyclerView.setAdapter(new UserListAdapter(context, new ArrayList<User>(), this));
         userRecyclerView.setLayoutManager(layoutManager);
 
         return view;
@@ -77,7 +78,7 @@ public class UserSearchResultFragment extends Fragment implements SearchSubscrib
         userJsonString = result;
         userList = new Gson().fromJson(userJsonString, new TypeToken<List<User>>(){}.getType());
 
-        UserListAdapter userListAdapter = new UserListAdapter(context, userList);
+        UserListAdapter userListAdapter = new UserListAdapter(context, userList, this);
         userRecyclerView.swapAdapter(userListAdapter, false);
     }
 
@@ -87,5 +88,14 @@ public class UserSearchResultFragment extends Fragment implements SearchSubscrib
         fragment.setContext(context);
 
         return fragment;
+    }
+
+    @Override
+    public void notifyClick(Object itemClicked) {
+        if(itemClicked instanceof View) {
+            View viewClicked = (View) itemClicked;
+            User userClicked = userList.get(userRecyclerView.getChildAdapterPosition(viewClicked));
+            Log.d("USER CLICKED", userClicked.getName());
+        }
     }
 }
