@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MovieInfo" />
-        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".UserInfo"></activity>
     </application>
 
 </manifest>
