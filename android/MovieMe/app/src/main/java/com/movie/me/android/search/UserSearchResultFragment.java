@@ -3,6 +3,7 @@ package com.movie.me.android.search;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +16,10 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.movie.me.android.R;
+import com.movie.me.android.UserInfo;
 import com.movie.me.android.controller.UserListAdapter;
 import com.movie.me.android.domain.User;
+import com.movie.me.android.rest.FetchMoviesLikedByUserTask;
 import com.movie.me.android.util.RecyclerViewClickSubscriber;
 
 import java.util.ArrayList;
@@ -95,6 +98,9 @@ public class UserSearchResultFragment extends Fragment implements SearchSubscrib
         if(itemClicked instanceof View) {
             View viewClicked = (View) itemClicked;
             User userClicked = userList.get(userRecyclerView.getChildAdapterPosition(viewClicked));
+
+            new FetchMoviesLikedByUserTask(getActivity(), userClicked).execute(userClicked.getUserid());
+
             Log.d("USER CLICKED", userClicked.getName());
         }
     }

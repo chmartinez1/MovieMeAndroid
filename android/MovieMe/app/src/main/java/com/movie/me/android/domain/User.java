@@ -18,6 +18,8 @@ public class User {
 
     private String email;
 
+    private String username;
+
     private Set<Movie> moviesLiked;
 
     private Set<User> friends;
@@ -88,6 +90,14 @@ public class User {
 
     public String getAge() {
         return age;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setAge(String age) {

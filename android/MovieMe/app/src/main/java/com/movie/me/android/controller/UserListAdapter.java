@@ -50,6 +50,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     public void onBindViewHolder(UserViewHolder holder, int position) {
         User currUser = userResultList.get(position);
         Picasso.with(context).load(currUser.getPhotoURI()).transform(new RoundedTransformation()).into(holder.userProfileImage);
+        holder.username.setText(currUser.getUsername());
         holder.name.setText(currUser.getName());
     }
 
@@ -65,11 +66,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         ImageView userProfileImage;
+        TextView username;
         TextView name;
 
         public UserViewHolder(View itemView) {
             super(itemView);
             this.userProfileImage = (ImageView) itemView.findViewById(R.id.user_profile_image);
+            this.username = (TextView) itemView.findViewById(R.id.username);
             this.name = (TextView) itemView.findViewById(R.id.name);
         }
     }
