@@ -2,6 +2,7 @@ package com.movie.me.android;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.movie.me.android.rest.ServerSideSigninTask;
 import com.movie.me.android.search.SearchActivity;
 
 public class SignInActivity extends  AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -27,6 +29,8 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
+
+    private ServerSideSigninTask serverSideSigninTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
 
@@ -168,8 +173,10 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
 
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acc = result.getSignInAccount();
+            String idToken = acc.getIdToken();
+            serverSideSigninTask = new ServerSideSigninTask(idToken);
             GoogleSignInAccount acct = result.getSignInAccount();
-            Log.d("EMAIL", "Email: " + result.getSignInAccount().getEmail());
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
             hideProgressDialog();
@@ -186,9 +193,9 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_in_button:
-                Intent i = new Intent(this, SearchActivity.class);
-                startActivity(i);
-//                signIn();
+//                Intent i = new Intent(this, SearchActivity.class);
+//                startActivity(i);
+                signIn();
                 break;
             case R.id.sign_out_button:
                 signOut();
