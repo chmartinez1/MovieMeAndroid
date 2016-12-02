@@ -43,6 +43,7 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
 
@@ -85,8 +86,6 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         Log.d("signIn()", "Launching sign in Activity");
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
-        //TODO: Go to next activity. Home screen
     }
 
     private void signOut() {
@@ -154,6 +153,7 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            //
             handleSignInResult(result);
         }
     }
@@ -167,14 +167,17 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
 //        Log.d("NAME", acc.getDisplayName());
 
         if (result.isSuccess()) {
+            //
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Log.d("EMAIL", "Email: " + result.getSignInAccount().getEmail());
+            Log.d("TOKEN", "Token: " + acct.getIdToken());
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
             hideProgressDialog();
-            Intent i = new Intent(this, SearchActivity.class);
+            Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);
+            //finish();
         } else {
             // Signed out, show unauthenticated UI.
             hideProgressDialog();
@@ -186,9 +189,7 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_in_button:
-                Intent i = new Intent(this, SearchActivity.class);
-                startActivity(i);
-//                signIn();
+                signIn();
                 break;
             case R.id.sign_out_button:
                 signOut();
@@ -198,5 +199,4 @@ public class SignInActivity extends  AppCompatActivity implements GoogleApiClien
                 break;
         }
     }
-
 }

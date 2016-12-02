@@ -94,6 +94,26 @@ public class UserInfo extends AppCompatActivity implements RecyclerViewClickSubs
 
     @Override
     public void notifyClick(Object itemClicked) {
-        
+        if(itemClicked instanceof View) {
+            View viewClicked = (View) itemClicked;
+            Movie movieClicked = movieList.get(movieRecyclerView.getChildAdapterPosition(viewClicked));
+            Log.d("MOVIE CLICKED", movieClicked.getTitle());
+
+
+            Intent intent = new Intent(this, MovieInfo.class);
+            intent.putExtra("MOVIE_IMDBID",movieClicked.getImdbid());
+            intent.putExtra("MOVIE_TITLE",movieClicked.getTitle());
+            intent.putExtra("MOVIE_POSTER",movieClicked.getPoster());
+            intent.putExtra("MOVIE_ACTORS",movieClicked.getActors());
+            intent.putExtra("MOVIE_DATE",movieClicked.getReleaseDate());
+            intent.putExtra("MOVIE_RATING",movieClicked.getRating());
+            intent.putExtra("MOVIE_RATED",movieClicked.getRated());
+            intent.putExtra("MOVIE_PLOT",movieClicked.getPlot());
+            intent.putExtra("MOVIE_DIRECTOR",movieClicked.getDirector());
+            intent.putExtra("MOVIE_RUNTIME",movieClicked.getRuntime());
+            intent.putExtra("MOVIE_WRITER",movieClicked.getWriter());
+            intent.putExtra("MOVIE_GENRE",movieClicked.getGenre());
+            startActivity(intent);
+        }
     }
 }
