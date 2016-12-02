@@ -28,11 +28,11 @@ public class FetchSearchResultTask extends AsyncTask<String, Void, String> {
 
     private ProgressDialog dialog;
 
-    public FetchSearchResultTask(String seardhType, Context context, SearchResultProvider searchResultProvider, SearchSubscriber searchSubscriber) {
+    public FetchSearchResultTask(String searchType, Context context, SearchResultProvider searchResultProvider, SearchSubscriber searchSubscriber) {
         this.searchResultProvider = searchResultProvider;
         this.searchSubscriber = searchSubscriber;
         this.context = context;
-        this.searchType = seardhType;
+        this.searchType = searchType;
         dialog = new ProgressDialog((this.context));
     }
 
