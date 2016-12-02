@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.movie.me.android.controller.MovieListAdapter;
 import com.movie.me.android.domain.Movie;
+import com.movie.me.android.util.RecyclerViewClickSubscriber;
 import com.movie.me.android.util.RoundedTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class UserInfo extends AppCompatActivity {
+public class UserInfo extends AppCompatActivity implements RecyclerViewClickSubscriber {
     private TextView usernameTextView;
     private ImageView profilePhotoImageView;
     private Button addFriendButton;
@@ -86,8 +87,13 @@ public class UserInfo extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         movieRecyclerView.setHasFixedSize(true);
-        movieRecyclerView.setAdapter(new MovieListAdapter(this, movieList));
+        movieRecyclerView.setAdapter(new MovieListAdapter(this, movieList,this));
         movieRecyclerView.setLayoutManager(layoutManager);
 
+    }
+
+    @Override
+    public void notifyClick(Object itemClicked) {
+        
     }
 }

@@ -1,5 +1,7 @@
 package com.movie.me.android.search;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 
 import com.movie.me.android.R;
 import com.movie.me.android.rest.FetchSearchResultTask;
+import com.movie.me.android.util.SignedInUserPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,13 @@ public class SearchActivity extends AppCompatActivity implements SearchResultPro
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(SignedInUserPreferences.SHARED_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SignedInUserPreferences.USER_ID_KEY, "12345");
+        editor.putString(SignedInUserPreferences.USERNAME_KEY, "juice94");
+        editor.putString(SignedInUserPreferences.EMAIL_KEY, "hugoargueta94@gmail.com");
+        editor.apply();
 
         resultProvider = this;
 
