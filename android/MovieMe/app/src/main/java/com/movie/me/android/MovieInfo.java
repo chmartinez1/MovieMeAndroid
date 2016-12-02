@@ -3,13 +3,18 @@ package com.movie.me.android;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.movie.me.android.rest.LikeMovieTask;
+import com.movie.me.android.util.SignedInUserPreferences;
 import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 
-public class MovieInfo extends AppCompatActivity {
+public class MovieInfo extends AppCompatActivity implements View.OnClickListener {
 
 
     public String title;
@@ -35,6 +40,7 @@ public class MovieInfo extends AppCompatActivity {
     TextView plotTextView;
     TextView writersTextView;
     ImageView posterImageView;
+    Button likeButton;
 
 
     @Override
@@ -80,6 +86,8 @@ public class MovieInfo extends AppCompatActivity {
         this.ratedTextView.setText(rated);
         this.ratingTextView = (TextView) findViewById(R.id.movie_rating);
         this.ratingTextView.setText(rating);
+        this.likeButton = (Button) findViewById(R.id.like_button);
+        likeButton.setOnClickListener(this);
 
 
         this.posterImageView = (ImageView)findViewById(R.id.movie_poster_image);
@@ -90,6 +98,15 @@ public class MovieInfo extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.like_button) {
+            String currUserid = SignedInUserPreferences.getUserid(this);
+
+            new LikeMovieTask(this).execute(currUserid, imdbid);
+        }
     }
 }
 
