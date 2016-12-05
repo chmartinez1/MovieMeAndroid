@@ -1,140 +1,138 @@
 package com.movie.me.android.domain;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by hargueta on 10/27/16.
  */
 public class Movie {
 
-    private String imdbid;
+    private String IMDBID;
 
-    private String title;
+    private String TITLE;
 
-    private String rating;
+    private String RATING;
 
-    private String rated;
+    private String RATED;
 
-    private String releaseDate;
+    private String RELEASED;
 
-    private String plot;
+    private String PLOT;
 
-    private String writer;
+    private String WRITER;
 
-    private String director;
+    private String DIRECTOR;
 
-    private String actors;
+    private String ACTORS;
 
-    private String genre;
+    private String GENRE;
 
-    private String runtime;
+    private String RUNTIME;
 
-    private String poster;
-
-    private Bitmap posterBitmap;
-
-    public Bitmap getPosterBitmap() {
-        return posterBitmap;
-    }
-
-    public void setPosterBitmap(Bitmap posterBitmap) {
-        this.posterBitmap = posterBitmap;
-    }
+    private String POSTER;
+//
+//    private Bitmap posterBitmap;
+//
+//    public Bitmap getPosterBitmap() {
+//        return posterBitmap;
+//    }
+//
+//    public void setPosterBitmap(Bitmap posterBitmap) {
+//        this.posterBitmap = posterBitmap;
+//    }
 
     public String getImdbid() {
-        return imdbid;
+        return IMDBID;
     }
 
-    public void setImdbid(String imdbid) {
-        this.imdbid = imdbid;
+    public void setImdbid(String IMDBID) {
+        this.IMDBID = IMDBID;
     }
 
     public String getRated() {
-        return rated;
+        return RATED;
     }
 
-    public void setRated(String rated) {
-        this.rated = rated;
+    public void setRated(String RATED) {
+        this.RATED = RATED;
     }
 
     public String getPlot() {
-        return plot;
+        return PLOT;
     }
 
-    public void setPlot(String plot) {
-        this.plot = plot;
+    public void setPlot(String PLOT) {
+        this.PLOT = PLOT;
     }
 
     public String getWriter() {
-        return writer;
+        return WRITER;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setWriter(String WRITER) {
+        this.WRITER = WRITER;
     }
 
     public String getDirector() {
-        return director;
+        return DIRECTOR;
     }
 
-    public void setDirector(String director) {
-        this.director = director;
+    public void setDirector(String DIRECTOR) {
+        this.DIRECTOR = DIRECTOR;
     }
 
     public String getActors() {
-        return actors;
+        return ACTORS;
     }
 
-    public void setActors(String actors) {
-        this.actors = actors;
+    public void setActors(String ACTORS) {
+        this.ACTORS = ACTORS;
     }
 
     public String getGenre() {
-        return genre;
+        return GENRE;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenre(String GENRE) {
+        this.GENRE = GENRE;
     }
 
     public String getRuntime() {
-        return runtime;
+        return RUNTIME;
     }
 
     public void setRuntime(String runtime) {
-        this.runtime = runtime;
+        this.RUNTIME = runtime;
     }
 
     public String getPoster() {
-        return poster;
+        return POSTER;
     }
 
-    public void setPoster(String poster) {
-        this.poster = poster;
+    public void setPoster(String POSTER) {
+        this.POSTER = POSTER;
     }
 
     public String getTitle() {
-        return title;
+        return TITLE;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.TITLE = title;
     }
 
     public String getRating() {
-        return rating;
+        return RATING;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setRating(String RATING) {
+        this.RATING = RATING;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getReleased() {
+        return RELEASED;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleased(String RELEASED) {
+        this.RELEASED = RELEASED;
     }
 
 }

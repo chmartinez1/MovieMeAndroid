@@ -7,13 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.movie.me.android.controller.MovieListAdapter;
 import com.movie.me.android.domain.Movie;
+import com.movie.me.android.domain.User;
 import com.movie.me.android.rest.FetchMovieRecommendationsTask;
 import com.movie.me.android.search.SearchActivity;
 import com.movie.me.android.search.SearchSubscriber;
@@ -41,8 +41,9 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewClick
         moviesRecommendedLabel= (TextView) findViewById(R.id.movies_recommended_label);
         defaultMoviesRecommendedTextView = (TextView) findViewById(R.id.default_movies_recommended_label);
 
-        movieRecyclerView = (RecyclerView) findViewById(R.id.movie_result);
+        movieRecyclerView = (RecyclerView) findViewById(R.id.movies_recommended_for_user);
         Log.d("RECYCLERVIEW", "INSTANTIATED");
+        movieList = new ArrayList<>();
         if(movieList.size() != 0) {
             defaultMoviesRecommendedTextView.setVisibility(View.GONE);
         }
@@ -52,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewClick
         movieRecyclerView.setHasFixedSize(true);
         movieRecyclerView.setAdapter(new MovieListAdapter(this, new ArrayList<Movie>(),this));
         movieRecyclerView.setLayoutManager(layoutManager);
-        new FetchMovieRecommendationsTask(this);
+        new FetchMovieRecommendationsTask(this, new User(), this);
 
     }
 
@@ -72,7 +73,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewClick
             intent.putExtra("MOVIE_TITLE",movieClicked.getTitle());
             intent.putExtra("MOVIE_POSTER",movieClicked.getPoster());
             intent.putExtra("MOVIE_ACTORS",movieClicked.getActors());
-            intent.putExtra("MOVIE_DATE",movieClicked.getReleaseDate());
+            intent.putExtra("MOVIE_DATE",movieClicked.getReleased());
             intent.putExtra("MOVIE_RATING",movieClicked.getRating());
             intent.putExtra("MOVIE_RATED",movieClicked.getRated());
             intent.putExtra("MOVIE_PLOT",movieClicked.getPlot());

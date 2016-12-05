@@ -98,7 +98,6 @@ public class MovieSearchResultFragment extends Fragment implements SearchSubscri
         movieRecyclerView.swapAdapter(movieListAdapter, false);
     }
 
-
     public static MovieSearchResultFragment newInstance(Context context) {
 
 
@@ -113,7 +112,7 @@ public class MovieSearchResultFragment extends Fragment implements SearchSubscri
         if(itemClicked instanceof View) {
             View viewClicked = (View) itemClicked;
             Movie movieClicked = movieList.get(movieRecyclerView.getChildAdapterPosition(viewClicked));
-            Log.d("MOVIE CLICKED", movieClicked.getTitle());
+            Log.d("MOVIE CLICKED", movieClicked.toString());
 
 
             Intent intent = new Intent(getActivity(), MovieInfo.class);
@@ -121,7 +120,7 @@ public class MovieSearchResultFragment extends Fragment implements SearchSubscri
             intent.putExtra("MOVIE_TITLE",movieClicked.getTitle());
             intent.putExtra("MOVIE_POSTER",movieClicked.getPoster());
             intent.putExtra("MOVIE_ACTORS",movieClicked.getActors());
-            intent.putExtra("MOVIE_DATE",movieClicked.getReleaseDate());
+            intent.putExtra("MOVIE_DATE",movieClicked.getReleased());
             intent.putExtra("MOVIE_RATING",movieClicked.getRating());
             intent.putExtra("MOVIE_RATED",movieClicked.getRated());
             intent.putExtra("MOVIE_PLOT",movieClicked.getPlot());

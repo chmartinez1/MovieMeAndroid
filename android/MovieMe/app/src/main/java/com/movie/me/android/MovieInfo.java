@@ -17,18 +17,18 @@ import org.w3c.dom.Text;
 public class MovieInfo extends AppCompatActivity implements View.OnClickListener {
 
 
-    public String title;
-    public String actors;
-    public String rating;
-    public String rated;
-    public String director;
-    public String runtime;
-    public String genre;
-    public String date;
-    public String plot;
-    public String writers;
-    public String poster;
-    public String imdbid;
+    private String title;
+    private String actors;
+    private String rating;
+    private String rated;
+    private String director;
+    private String runtime;
+    private String genre;
+    private String date;
+    private String plot;
+    private String writers;
+    private String poster;
+    private String imdbid;
     TextView titleTextView;
     TextView actorsTextView;
     TextView ratingTextView;

@@ -2,23 +2,18 @@ package com.movie.me.android.controller;
 
 import com.movie.me.android.R;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.movie.me.android.R;
+
 import com.movie.me.android.domain.Movie;
 import com.movie.me.android.util.RecyclerViewClickSubscriber;
 import com.squareup.picasso.Picasso;
-import java.io.InputStream;
+
 import java.util.List;
-import static android.support.v7.recyclerview.R.styleable.RecyclerView;
 
 
 /**

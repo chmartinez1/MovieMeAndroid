@@ -19,6 +19,7 @@ import com.movie.me.android.rest.FetchSearchResultTask;
 import com.movie.me.android.util.SignedInUserPreferences;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -109,7 +110,10 @@ public class SearchActivity extends AppCompatActivity implements SearchResultPro
             public boolean onQueryTextSubmit(String query) {
                 // perform query here
 
-                searchResultTask.execute(query);
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("property","title");
+                map.put("value",query);
+                searchResultTask.setup(map).execute("GET");
 
                 // workaround to avoid issues with some emulators and keyboard devices firing twice if a keyboard enter is used
                 // see https://code.google.com/p/android/issues/detail?id=24599
@@ -143,10 +147,10 @@ public class SearchActivity extends AppCompatActivity implements SearchResultPro
     public void setSearchResultTask() {
         switch(position) {
             case 0:
-                searchResultTask = new FetchSearchResultTask("movie", this, this, searchSubscribers.get(position));
+                searchResultTask = new FetchSearchResultTask(this, this, searchSubscribers.get(position));
                 break;
             case 1:
-                searchResultTask = new FetchSearchResultTask("user", this, this, searchSubscribers.get(position));
+                //searchResultTask = new FetchSearchResultTask("user", this, this, searchSubscribers.get(position));
                 break;
         }
     }

@@ -3,7 +3,6 @@ package com.movie.me.android;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,9 +20,7 @@ import com.movie.me.android.util.RecyclerViewClickSubscriber;
 import com.movie.me.android.util.RoundedTransformation;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class UserInfo extends AppCompatActivity implements RecyclerViewClickSubscriber {
     private TextView usernameTextView;
@@ -105,7 +102,7 @@ public class UserInfo extends AppCompatActivity implements RecyclerViewClickSubs
             intent.putExtra("MOVIE_TITLE",movieClicked.getTitle());
             intent.putExtra("MOVIE_POSTER",movieClicked.getPoster());
             intent.putExtra("MOVIE_ACTORS",movieClicked.getActors());
-            intent.putExtra("MOVIE_DATE",movieClicked.getReleaseDate());
+            intent.putExtra("MOVIE_DATE",movieClicked.getReleased());
             intent.putExtra("MOVIE_RATING",movieClicked.getRating());
             intent.putExtra("MOVIE_RATED",movieClicked.getRated());
             intent.putExtra("MOVIE_PLOT",movieClicked.getPlot());
