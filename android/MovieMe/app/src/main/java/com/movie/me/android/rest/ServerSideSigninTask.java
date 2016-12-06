@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.movie.me.android.HomeActivity;
 import com.movie.me.android.domain.User;
 
 import java.io.BufferedReader;
@@ -27,9 +28,8 @@ public class ServerSideSigninTask extends AsyncTask<String, Void, String> {
     private Activity activity;
     private String idToken;
 
-    public ServerSideSigninTask(Activity activity, String idToken) {
+    public ServerSideSigninTask(Activity activity) {
         this.activity = activity;
-        this.idToken = idToken;
     }
 
     @Override

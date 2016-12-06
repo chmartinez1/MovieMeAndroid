@@ -49,8 +49,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
         User currUser = userResultList.get(position);
-        Picasso.with(context).load(currUser.getPhotoURI()).transform(new RoundedTransformation()).into(holder.userProfileImage);
-        holder.username.setText(currUser.getUsername());
+        try {
+            Picasso.with(context).load(currUser.getPhotoURI())
+                    .transform(new RoundedTransformation()).into(holder.userProfileImage);
+        } catch(Exception e) {
+            Picasso.with(context).load(R.mipmap.ic_launcher)
+                    .transform(new RoundedTransformation()).into(holder.userProfileImage);
+        }
+        holder.username.setText(currUser.getName());
         holder.name.setText(currUser.getName());
     }
 

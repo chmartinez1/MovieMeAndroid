@@ -126,7 +126,6 @@ public class FetchMoviesLikedByUserTask extends AsyncTask<String, Void, String> 
             Log.d("Result", result);
 
             Intent i = new Intent(this.activity, UserInfo.class);
-            i.putExtra("username", user.getUsername());
             i.putExtra("profileImage", user.getPhotoURI());
             i.putExtra("userid", user.getUserid());
             i.putExtra("moviesLiked", result);

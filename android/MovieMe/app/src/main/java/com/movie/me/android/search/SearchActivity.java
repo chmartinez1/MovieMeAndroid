@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 public class SearchActivity extends AppCompatActivity implements SearchResultProvider {
     int position = 0;
     SearchResultProvider resultProvider;
@@ -108,15 +107,19 @@ public class SearchActivity extends AppCompatActivity implements SearchResultPro
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // perform query here
+                HashMap<String, String> map = new HashMap<>();
 
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put("property","title");
-                map.put("value",query);
-                searchResultTask.setup(map).execute("GET");
-
-                // workaround to avoid issues with some emulators and keyboard devices firing twice if a keyboard enter is used
-                // see https://code.google.com/p/android/issues/detail?id=24599
+                switch(position) {
+                    case 0:
+                        map.put("property", "title");
+                        map.put("value", query);
+                        searchResultTask.setup(map).execute("GET");
+                        break;
+                    case 1:
+                        map.put("name", query);
+                        searchResultTask.setup(map).execute("GET");
+                        break;
+                }
                 searchView.clearFocus();
 
                 return true;
@@ -147,10 +150,12 @@ public class SearchActivity extends AppCompatActivity implements SearchResultPro
     public void setSearchResultTask() {
         switch(position) {
             case 0:
-                searchResultTask = new FetchSearchResultTask(this, this, searchSubscribers.get(position));
+                searchResultTask = new FetchSearchResultTask(this,this,searchSubscribers.get(0));
+                searchResultTask.setSearchType("movie/");
                 break;
             case 1:
-                //searchResultTask = new FetchSearchResultTask("user", this, this, searchSubscribers.get(position));
+                searchResultTask = new FetchSearchResultTask(this,this,searchSubscribers.get(1));
+                searchResultTask.setSearchType("user/");
                 break;
         }
     }
